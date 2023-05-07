@@ -21,5 +21,5 @@ import home_module,account_module
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home_module.urls', namespace='home_module')),
-    path('', include('account_module.urls', namespace='account_module')),
+    path('accounts/', include('account_module.urls', namespace='account_module')),
 ]
