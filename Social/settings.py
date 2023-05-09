@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # internal apps
     'home_module.apps.HomeModuleConfig',
     'account_module.apps.AccountModuleConfig',
+    'user_posts.apps.UserPostsConfig'
 ]
 
 MIDDLEWARE = [
