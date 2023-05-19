@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from account_module.forms import UserRegistrationForm, UserLoginForm
-
+from user_posts.models import UserPost
 
 # Create your views here.
 
@@ -27,7 +27,7 @@ class UserRegisterView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            User.objects.create_user(cd['username'], cd['email'], cd['password'])
+            User.objects.create_user(username=cd['username'], email=cd['email'], password=cd['password'])
             messages.success(request, 'your register is successfuly', 'success')
             return redirect('home_module:home')
         return render(request, self.template_name, {'form': form})
@@ -70,4 +70,9 @@ class UserProfileView(LoginRequiredMixin, View):
     template_name = 'account_module/profile.html'
     def get(self, request, user_id):
         user = User.objects.get(id=user_id)
-        return render(request, self.template_name, {'user':user})
+        post = UserPost.objects.filter(user=user)
+        context = {
+            'user': user,
+            'posts': post,
+        }
+        return render(request, self.template_name, context)

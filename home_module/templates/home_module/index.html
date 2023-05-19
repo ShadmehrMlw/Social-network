@@ -5,5 +5,10 @@
 {% endblock %}
 
 {% block content %}
-    <h3>This is index...</h3>
+    <div class="card">
+        {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.body|truncatewords:5 }}</a>
+        {% endfor %}
+
+    </div>
 {% endblock %}

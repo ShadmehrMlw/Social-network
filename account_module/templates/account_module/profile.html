@@ -6,4 +6,10 @@
 
 {% block content %}
     <h3 class="text-center">{{ user.username }}</h3>
+    <div class="card">
+        {% for post in posts %}
+            <a href="{% url 'home_module:post_detail' post.id post.slug %}" class="card-body">{{ post.body|truncatewords:5 }}</a>
+        {% endfor %}
+
+    </div>
 {% endblock %}
