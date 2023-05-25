@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpRequest
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from account_module.forms import UserRegistrationForm, UserLoginForm
@@ -69,8 +69,8 @@ class UserLogoutView(LoginRequiredMixin,View):
 class UserProfileView(LoginRequiredMixin, View):
     template_name = 'account_module/profile.html'
     def get(self, request, user_id):
-        user = get_object_or_404(UserPost, id=user_id)
-        post = UserPost.objects.filter(user=user)
+        user = get_object_or_404(User, id=user_id)
+        post = get_list_or_404(UserPost, user=user)
         context = {
             'user': user,
             'posts': post,
