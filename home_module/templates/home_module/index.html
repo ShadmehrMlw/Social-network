@@ -9,6 +9,7 @@
         {% for post in posts %}
             <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.body|truncatewords:5 }}</a>
         {% endfor %}
-
     </div>
+    <br>
+
 {% endblock %}

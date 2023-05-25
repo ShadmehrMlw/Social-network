@@ -10,6 +10,9 @@
         {% for post in posts %}
             <a href="{% url 'home_module:post_detail' post.id post.slug %}" class="card-body">{{ post.body|truncatewords:5 }}</a>
         {% endfor %}
-
     </div>
+    <br>
+    {% if request.user.id == user.id %}
+        <a href="{% url 'home_module:post_create' %}" class="btn btn-primary">New post</a>
+    {% endif %}
 {% endblock %}
